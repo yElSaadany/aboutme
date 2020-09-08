@@ -14,8 +14,10 @@ body {
   min-height: 100vh;
 }
 
-main {
-  padding: 2rem 0;
+header {
+  height: 30vh;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eaeaea;
 }
 
 footer {
@@ -39,9 +41,35 @@ footer {
 }
 
 .description {
+  margin: 0;
   font-size: 1.5rem;
+}
+
+#social-media-icons {
+  margin-top: 0.5rem;
 }
 
 #social-media-icons a {
   margin: 0 0.3rem;
+}
+
+main {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  align-items: center;
+  flex-grow: column;
+  height: 70vh;
+  max-width: 700px;
+  margin: auto;
+}
+
+main p {
+  font-size: 3rem;
+  width: 100%;
+}
+
+main p:hover {
+  color: darkorchid;
+  cursor: pointer;
 }

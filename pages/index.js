@@ -8,7 +8,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <header>
         <h1 className="title">Youssef El Saadany</h1>
 
         <p className="description">
@@ -26,6 +26,12 @@ export default function Home() {
             <img src="/mail.svg" alt="Mail logo" width="35px" />
           </a>
         </div>
+      </header>
+
+      <main>
+        <p>Blog</p>
+        <p>Portfolio</p>
+        <p>Contact</p>
       </main>
 
       <footer>Made by Youssef El Saadany using Next.js</footer>
