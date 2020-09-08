@@ -1,6 +1,8 @@
 import Head from "next/head";
+import { useState } from "react";
 
 export default function Home() {
+  const [clicked, setClicked] = useState(false);
   return (
     <div className="container">
       <Head>
@@ -12,7 +14,7 @@ export default function Home() {
         <h1 className="title">Youssef El Saadany</h1>
 
         <p className="description">
-          <code>Computer Science Student</code>
+          <code>Software Engineer</code>
         </p>
 
         <div id="social-media-icons">
@@ -28,10 +30,10 @@ export default function Home() {
         </div>
       </header>
 
-      <main>
-        <p>Blog</p>
-        <p>Portfolio</p>
-        <p>Contact</p>
+      <main className={clicked ? "clicked" : ""}>
+        <p onClick={() => setClicked(!clicked)}>Games</p>
+        <p onClick={() => setClicked(!clicked)}>Portfolio</p>
+        <p onClick={() => setClicked(!clicked)}>Contact</p>
       </main>
 
       <footer>Made by Youssef El Saadany using Next.js</footer>

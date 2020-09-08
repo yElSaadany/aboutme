@@ -38,6 +38,7 @@ footer {
 .description,
 #social-media-icons {
   text-align: center;
+  font-weight: lighter;
 }
 
 .description {
@@ -65,11 +66,18 @@ main {
 }
 
 main p {
+  margin: 0;
   font-size: 3rem;
   width: 100%;
+  font-weight: lighter;
 }
 
 main p:hover {
   color: darkorchid;
   cursor: pointer;
+}
+
+/* Animations? */
+.clicked {
+  align-items: flex-start;
 }
