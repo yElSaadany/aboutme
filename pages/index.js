@@ -1,9 +1,31 @@
 import Head from "next/head";
 import { useState } from "react";
 import { CSSTransition } from "react-transition-group";
+import { Document, Page, pdfjs } from "react-pdf";
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function Home() {
   const [clicked, setClicked] = useState(false);
+  const [showResume, setShowResume] = useState(false);
+  const [numPages, setNumPages] = useState(null);
+
+  const handleShowResume = (e) => {
+    setShowResume((prev) => setShowResume(!prev));
+    setClicked((prev) => setClicked(!prev));
+  };
+
+  function removeTextLayerOffset() {
+    const textLayers = document.querySelectorAll(
+      ".react-pdf__Page__textContent"
+    );
+    textLayers.forEach((layer) => {
+      const { style } = layer;
+      style.top = "0";
+      style.left = "0";
+      style.transform = "";
+    });
+  }
+
   return (
     <div className="container">
       <Head>
@@ -38,9 +60,28 @@ export default function Home() {
       <CSSTransition in={clicked} timeout={500} classNames="clicked">
         <main className={clicked ? "clicked" : ""}>
           <p onClick={() => setClicked((prev) => setClicked(!prev))}>Games</p>
+          <p name="resume" onClick={handleShowResume}>
+            Résumé
+          </p>
           <p onClick={() => setClicked(!clicked)}>Portfolio</p>
           <p onClick={() => setClicked(!clicked)}>Contact</p>
         </main>
+      </CSSTransition>
+      <CSSTransition
+        in={showResume}
+        timeout={500}
+        classNames="react-pdf__Document"
+      >
+        <Document
+          className={showResume ? "resume" : ""}
+          file="/CV_El_Saadany.pdf"
+        >
+          <Page
+            pageNumber={1}
+            width={900}
+            onLoadSuccess={removeTextLayerOffset}
+          />
+        </Document>
       </CSSTransition>
 
       <footer>Made by Youssef El Saadany using Next.js</footer>
