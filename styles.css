@@ -78,6 +78,6 @@ main p:hover {
 }
 
 /* Animations? */
-.clicked {
+main.clicked {
   align-items: flex-start;
 }

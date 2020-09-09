@@ -8,6 +8,10 @@ export default function Home() {
       <Head>
         <title>Youssef El Saadany - Personal Website</title>
         <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
       </Head>
 
       <header>
@@ -30,7 +34,13 @@ export default function Home() {
         </div>
       </header>
 
-      <main className={clicked ? "clicked" : ""}>
+      <main
+        className={
+          clicked
+            ? "animate__animated animate__slideInUp clicked"
+            : "animate__animated animate__slideInDown"
+        }
+      >
         <p onClick={() => setClicked(!clicked)}>Games</p>
         <p onClick={() => setClicked(!clicked)}>Portfolio</p>
         <p onClick={() => setClicked(!clicked)}>Contact</p>
