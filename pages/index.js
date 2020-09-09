@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
+import { CSSTransition } from "react-transition-group";
 
 export default function Home() {
   const [clicked, setClicked] = useState(false);
@@ -34,17 +35,13 @@ export default function Home() {
         </div>
       </header>
 
-      <main
-        className={
-          clicked
-            ? "animate__animated animate__slideInUp clicked"
-            : "animate__animated animate__slideInDown"
-        }
-      >
-        <p onClick={() => setClicked(!clicked)}>Games</p>
-        <p onClick={() => setClicked(!clicked)}>Portfolio</p>
-        <p onClick={() => setClicked(!clicked)}>Contact</p>
-      </main>
+      <CSSTransition in={clicked} timeout={500} classNames="clicked">
+        <main className={clicked ? "clicked" : ""}>
+          <p onClick={() => setClicked((prev) => setClicked(!prev))}>Games</p>
+          <p onClick={() => setClicked(!clicked)}>Portfolio</p>
+          <p onClick={() => setClicked(!clicked)}>Contact</p>
+        </main>
+      </CSSTransition>
 
       <footer>Made by Youssef El Saadany using Next.js</footer>
     </div>

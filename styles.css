@@ -58,11 +58,11 @@ main {
   display: flex;
   justify-content: space-around;
   text-align: center;
-  align-items: center;
   flex-grow: column;
-  height: 70vh;
   max-width: 700px;
   margin: auto;
+  margin-top: 30vh;
+  margin-bottom: 30vh;
 }
 
 main p {
@@ -78,6 +78,15 @@ main p:hover {
 }
 
 /* Animations? */
-main.clicked {
-  align-items: flex-start;
+.clicked-enter,
+.clicked {
+  margin-top: 0vh;
+  margin-bottom: 60vh;
+  transition: margin-top 0.5s, margin-bottom 0.5s;
+}
+
+.clicked-exit {
+  margin-top: 30vh;
+  margin-bottom: 30vh;
+  transition: margin-top 0.5s, margin-bottom 0.5s;
 }
