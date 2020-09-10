@@ -7,11 +7,81 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 export default function Home() {
   const [clicked, setClicked] = useState(false);
   const [showResume, setShowResume] = useState(false);
+  const [showGames, setShowGames] = useState(false);
+  const [showPortfolio, setShowPortfolio] = useState(false);
+  const [showContact, setShowContact] = useState(false);
   const [numPages, setNumPages] = useState(null);
 
+  const showingSomething = (e) => {
+    if (
+      showResume == true ||
+      showGames == true ||
+      showPortfolio == true ||
+      showContact == true
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+
   const handleShowResume = (e) => {
-    setShowResume((prev) => setShowResume(!prev));
-    setClicked((prev) => setClicked(!prev));
+    if (showResume) {
+      setShowResume(false);
+      setClicked((prev) => setClicked(!prev));
+    } else if (clicked) {
+      stopShowing();
+      setShowResume(true);
+    } else {
+      setShowResume(true);
+      setClicked((prev) => setClicked(!prev));
+    }
+  };
+
+  const handleShowGames = (e) => {
+    if (showGames) {
+      setShowGames(false);
+      setClicked((prev) => setClicked(!prev));
+    } else if (clicked) {
+      stopShowing();
+      setShowGames(true);
+    } else {
+      setShowGames(true);
+      setClicked((prev) => setClicked(!prev));
+    }
+  };
+
+  const handleShowPortfolio = (e) => {
+    if (showPortfolio) {
+      setShowPortfolio(false);
+      setClicked((prev) => setClicked(!prev));
+    } else if (clicked) {
+      stopShowing();
+      setShowPortfolio(true);
+    } else {
+      setShowPortfolio(true);
+      setClicked((prev) => setClicked(!prev));
+    }
+  };
+
+  const handleShowContact = (e) => {
+    if (showContact) {
+      setShowContact(false);
+      setClicked((prev) => setClicked(!prev));
+    } else if (clicked) {
+      stopShowing();
+      setShowContact(true);
+    } else {
+      setShowContact(true);
+      setClicked((prev) => setClicked(!prev));
+    }
+  };
+
+  const stopShowing = () => {
+    setShowResume(false);
+    setShowGames(false);
+    setShowPortfolio(false);
+    setShowContact(false);
   };
 
   function removeTextLayerOffset() {
@@ -59,12 +129,12 @@ export default function Home() {
 
       <CSSTransition in={clicked} timeout={500} classNames="clicked">
         <main className={clicked ? "clicked" : ""}>
-          <p onClick={() => setClicked((prev) => setClicked(!prev))}>Games</p>
+          <p onClick={handleShowGames}>Games</p>
           <p name="resume" onClick={handleShowResume}>
             Résumé
           </p>
-          <p onClick={() => setClicked(!clicked)}>Portfolio</p>
-          <p onClick={() => setClicked(!clicked)}>Contact</p>
+          <p onClick={handleShowPortfolio}>Portfolio</p>
+          <p onClick={handleShowContact}>Contact</p>
         </main>
       </CSSTransition>
       <CSSTransition
@@ -84,6 +154,23 @@ export default function Home() {
         </Document>
       </CSSTransition>
 
+      <CSSTransition in={showGames} timeout={500} classNames="games">
+        <div className={showGames ? "games-content games" : "games"}>Games</div>
+      </CSSTransition>
+      <CSSTransition in={showPortfolio} timeout={500} classNames="portfolio">
+        <div
+          className={
+            showPortfolio ? "portfolio-content portfolio" : "portfolio"
+          }
+        >
+          Portfolio
+        </div>
+      </CSSTransition>
+      <CSSTransition in={showContact} timeout={500} classNames="contact">
+        <div className={showContact ? "contact-content contact" : "contact"}>
+          Contact
+        </div>
+      </CSSTransition>
       <footer>Made by Youssef El Saadany using Next.js</footer>
     </div>
   );

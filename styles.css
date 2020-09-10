@@ -90,7 +90,10 @@ main p:hover {
 }
 
 /* Résumé */
-.react-pdf__Document {
+.react-pdf__Document,
+.games,
+.portfolio,
+.contact {
   display: flex;
   justify-content: center;
   height: 0;
@@ -99,14 +102,31 @@ main p:hover {
 }
 
 .react-pdf__Document-enter,
-.resume {
+.resume,
+.games-enter,
+.games-content,
+.portfolio-enter,
+.portfolio-content,
+.contact-enter,
+.contact-content {
   opacity: 1;
   height: auto;
   transition: opacity 0.5s;
 }
 
-.react-pdf__Document-exit {
+.games-content,
+.portfolio-content,
+.contact-content {
+  height: 60vh;
+}
+
+.react-pdf__Document-exit,
+.games-exit,
+.portfolio-exit,
+.contact-exit {
   opacity: 0;
   height: auto;
   transition: opacity 0.5s;
 }
+
+/* Placeholder style */
