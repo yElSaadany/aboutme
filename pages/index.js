@@ -3,6 +3,7 @@ import { useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import { Document, Page, pdfjs } from "react-pdf";
 import { Snake } from "@bit/yelsaadany.react-games.snake";
+import { Backdrop } from "../components/Backdrop";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function Home() {
@@ -162,7 +163,9 @@ export default function Home() {
             {!playSnake ? (
               <button onClick={() => setPlaySnake(true)}>Play Snake</button>
             ) : (
-              <Snake gameOver={() => setPlaySnake(false)} />
+              <Backdrop>
+                <Snake gameOver={() => setPlaySnake(false)} />
+              </Backdrop>
             )}
           </div>
         </div>
