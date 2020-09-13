@@ -8,9 +8,12 @@
     "start": "next start"
   },
   "dependencies": {
+    "@bit/yelsaadany.react-games.snake": "^1.0.2",
+    "@material-ui/core": "^4.11.0",
     "next": "9.3.5",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-pdf": "^5.0.0",
     "react-transition-group": "^4.4.1"
   }
 }

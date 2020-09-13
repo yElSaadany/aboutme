@@ -1,9 +1,105 @@
 import Head from "next/head";
 import { useState } from "react";
 import { CSSTransition } from "react-transition-group";
+import { Document, Page, pdfjs } from "react-pdf";
+import { Snake } from "@bit/yelsaadany.react-games.snake";
+import { Backdrop } from "../components/Backdrop";
+import { Button } from "@material-ui/core";
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function Home() {
   const [clicked, setClicked] = useState(false);
+  const [showResume, setShowResume] = useState(false);
+  const [showGames, setShowGames] = useState(false);
+  const [showPortfolio, setShowPortfolio] = useState(false);
+  const [showContact, setShowContact] = useState(false);
+  const [playSnake, setPlaySnake] = useState(false);
+  const [numPages, setNumPages] = useState(null);
+
+  const showingSomething = (e) => {
+    if (
+      showResume == true ||
+      showGames == true ||
+      showPortfolio == true ||
+      showContact == true
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const handleShowResume = (e) => {
+    if (showResume) {
+      setShowResume(false);
+      setClicked((prev) => setClicked(!prev));
+    } else if (clicked) {
+      stopShowing();
+      setShowResume(true);
+    } else {
+      setShowResume(true);
+      setClicked((prev) => setClicked(!prev));
+    }
+  };
+
+  const handleShowGames = (e) => {
+    if (showGames) {
+      setShowGames(false);
+      setClicked((prev) => setClicked(!prev));
+    } else if (clicked) {
+      stopShowing();
+      setShowGames(true);
+    } else {
+      setShowGames(true);
+      setClicked((prev) => setClicked(!prev));
+    }
+  };
+
+  const handleShowPortfolio = (e) => {
+    if (showPortfolio) {
+      setShowPortfolio(false);
+      setClicked((prev) => setClicked(!prev));
+    } else if (clicked) {
+      stopShowing();
+      setShowPortfolio(true);
+    } else {
+      setShowPortfolio(true);
+      setClicked((prev) => setClicked(!prev));
+    }
+  };
+
+  const handleShowContact = (e) => {
+    if (showContact) {
+      setShowContact(false);
+      setClicked((prev) => setClicked(!prev));
+    } else if (clicked) {
+      stopShowing();
+      setShowContact(true);
+    } else {
+      setShowContact(true);
+      setClicked((prev) => setClicked(!prev));
+    }
+  };
+
+  const stopShowing = () => {
+    setShowResume(false);
+    setShowGames(false);
+    setShowPortfolio(false);
+    setShowContact(false);
+  };
+
+  function removeTextLayerOffset() {
+    const textLayers = document.querySelectorAll(
+      ".react-pdf__Page__textContent"
+    );
+    textLayers.forEach((layer) => {
+      const { style } = layer;
+      style.top = "0";
+      style.left = "0";
+      style.transform = "";
+    });
+  }
+
   return (
     <div className="container">
       <Head>
@@ -37,12 +133,60 @@ export default function Home() {
 
       <CSSTransition in={clicked} timeout={500} classNames="clicked">
         <main className={clicked ? "clicked" : ""}>
-          <p onClick={() => setClicked((prev) => setClicked(!prev))}>Games</p>
-          <p onClick={() => setClicked(!clicked)}>Portfolio</p>
-          <p onClick={() => setClicked(!clicked)}>Contact</p>
+          <p onClick={handleShowGames}>Games</p>
+          <p name="resume" onClick={handleShowResume}>
+            Résumé
+          </p>
+          <p onClick={handleShowPortfolio}>Portfolio</p>
+          <p onClick={handleShowContact}>Contact</p>
         </main>
       </CSSTransition>
+      <CSSTransition
+        in={showResume}
+        timeout={500}
+        classNames="react-pdf__Document"
+      >
+        <Document
+          className={showResume ? "resume" : ""}
+          file="/CV_El_Saadany.pdf"
+        >
+          <Page
+            pageNumber={1}
+            width={900}
+            onLoadSuccess={removeTextLayerOffset}
+          />
+        </Document>
+      </CSSTransition>
 
+      <CSSTransition in={showGames} timeout={500} classNames="games">
+        <div className={showGames ? "games-content games" : "games"}>
+          <div id="snake-game">
+            {!playSnake ? (
+              <Button variant="contained" onClick={() => setPlaySnake(true)}>
+                Play Snake
+              </Button>
+            ) : (
+              <Backdrop>
+                <Snake gameOver={() => setPlaySnake(false)} />
+              </Backdrop>
+            )}
+          </div>
+        </div>
+      </CSSTransition>
+      <CSSTransition in={showPortfolio} timeout={500} classNames="portfolio">
+        <div
+          className={
+            showPortfolio ? "portfolio-content portfolio" : "portfolio"
+          }
+        >
+          Portfolio
+        </div>
+      </CSSTransition>
+      <CSSTransition in={showContact} timeout={500} classNames="contact">
+        <div className={showContact ? "contact-content contact" : "contact"}>
+          Contact
+        </div>
+      </CSSTransition>
       <footer>Made by Youssef El Saadany using Next.js</footer>
     </div>
   );
