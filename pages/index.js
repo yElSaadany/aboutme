@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import { Document, Page, pdfjs } from "react-pdf";
+import { Snake } from "@bit/yelsaadany.react-games.snake";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
   const [showGames, setShowGames] = useState(false);
   const [showPortfolio, setShowPortfolio] = useState(false);
   const [showContact, setShowContact] = useState(false);
+  const [playSnake, setPlaySnake] = useState(false);
   const [numPages, setNumPages] = useState(null);
 
   const showingSomething = (e) => {
@@ -155,7 +157,15 @@ export default function Home() {
       </CSSTransition>
 
       <CSSTransition in={showGames} timeout={500} classNames="games">
-        <div className={showGames ? "games-content games" : "games"}>Games</div>
+        <div className={showGames ? "games-content games" : "games"}>
+          <div id="snake-game">
+            {!playSnake ? (
+              <button onClick={() => setPlaySnake(true)}>Play Snake</button>
+            ) : (
+              <Snake gameOver={() => setPlaySnake(false)} />
+            )}
+          </div>
+        </div>
       </CSSTransition>
       <CSSTransition in={showPortfolio} timeout={500} classNames="portfolio">
         <div

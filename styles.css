@@ -89,7 +89,7 @@ main p:hover {
   transition: margin-top 0.5s, margin-bottom 0.5s;
 }
 
-/* Résumé */
+/* All */
 .react-pdf__Document,
 .games,
 .portfolio,
@@ -99,6 +99,13 @@ main p:hover {
   height: 0;
   overflow: hidden;
   opacity: 0;
+}
+
+/* Games */
+.games {
+  margin-top: 3rem;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .react-pdf__Document-enter,
