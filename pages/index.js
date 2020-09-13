@@ -4,6 +4,7 @@ import { CSSTransition } from "react-transition-group";
 import { Document, Page, pdfjs } from "react-pdf";
 import { Snake } from "@bit/yelsaadany.react-games.snake";
 import { Backdrop } from "../components/Backdrop";
+import { Button } from "@material-ui/core";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function Home() {
@@ -161,7 +162,9 @@ export default function Home() {
         <div className={showGames ? "games-content games" : "games"}>
           <div id="snake-game">
             {!playSnake ? (
-              <button onClick={() => setPlaySnake(true)}>Play Snake</button>
+              <Button variant="contained" onClick={() => setPlaySnake(true)}>
+                Play Snake
+              </Button>
             ) : (
               <Backdrop>
                 <Snake gameOver={() => setPlaySnake(false)} />
