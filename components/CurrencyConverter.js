@@ -95,7 +95,7 @@ export const CurrencyConverter = () => {
 };
 
 const mainStyle = {
-  width: "40%",
+  width: "100%",
   margin: "auto",
   display: "flex",
   justifyContent: "space-evenly",
