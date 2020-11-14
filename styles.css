@@ -58,7 +58,6 @@ main {
   display: flex;
   justify-content: space-around;
   text-align: center;
-  flex-grow: column;
   max-width: 80vw;
   margin: auto;
   margin-top: 30vh;
@@ -101,12 +100,20 @@ main p:hover {
   opacity: 0;
 }
 
-/* Games */
+/* Stuff (previously Games) */
 .games {
   margin-top: 3rem;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
+
+#currency-converter {
+  font-size: 2rem;
+  font-weight: lighter;
+  text-align: center;
+}
+
 
 .react-pdf__Document-enter,
 .resume,

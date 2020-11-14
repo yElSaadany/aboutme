@@ -5,6 +5,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 import { Snake } from "@bit/yelsaadany.react-games.snake";
 import { Backdrop } from "../components/Backdrop";
 import { Button } from "@material-ui/core";
+import { CurrencyConverter } from "../components/CurrencyConverter";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
   const [showContact, setShowContact] = useState(false);
   const [playSnake, setPlaySnake] = useState(false);
   const [numPages, setNumPages] = useState(null);
+  const [currencyConverter, setCurrencyConverter] = useState(false);
 
   const showingSomething = (e) => {
     if (
@@ -133,7 +135,7 @@ export default function Home() {
 
       <CSSTransition in={clicked} timeout={500} classNames="clicked">
         <main className={clicked ? "clicked" : ""}>
-          <p onClick={handleShowGames}>Games</p>
+          <p onClick={handleShowGames}>Stuff</p>
           <p name="resume" onClick={handleShowResume}>
             Résumé
           </p>
@@ -170,6 +172,13 @@ export default function Home() {
                 <Snake gameOver={() => setPlaySnake(false)} />
               </Backdrop>
             )}
+          </div>
+          <div
+            style={{ zIndex: playSnake ? "-100" : "0" }}
+            id="currency-converter"
+          >
+            <p>Currency Converter</p>
+            <CurrencyConverter />
           </div>
         </div>
       </CSSTransition>
