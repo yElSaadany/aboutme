@@ -18,6 +18,9 @@ header {
   height: 30vh;
   padding: 0.5rem 0;
   border-bottom: 1px solid #eaeaea;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 footer {
@@ -143,4 +146,19 @@ main p:hover {
   transition: opacity 0.5s;
 }
 
-/* Placeholder style */
+/* Responsive Style */
+@media (max-width: 900px) {
+  main {
+    flex-direction: column;
+    margin-top: 0vh;
+    margin-bottom: 0vh;
+  }
+
+  header {
+    margin-bottom: 0vh;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+}
