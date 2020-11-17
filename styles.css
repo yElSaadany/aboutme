@@ -146,6 +146,71 @@ main p:hover {
   transition: opacity 0.5s;
 }
 
+.contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gpg-enter {
+  opacity: 0;
+}
+
+.gpg-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.gpg-exit {
+  opacity: 0;
+}
+.gpg-exit-active {
+  opacity: 0;
+  transition: opacity 300ms, transform 300ms;
+}
+
+#gpg-key-button {
+  margin-bottom: 10px;
+}
+
+#gpg-key-header {
+  display: flex;
+  justify-content: center;
+}
+
+#gpg-key-copy, #gpg-key-download {
+  width: 100%;
+}
+
+#gpg-key-download a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#gpg-key-close {
+  width: 100%;
+}
+
+#gpg-key {
+  text-align: center;
+  width: 60%;
+  border: 1px solid #ddd;
+  border-left: 3px solid coral;
+  color: #666;
+  font-family: monospace;
+  font-size: 15px;
+  margin-bottom: 1.6em;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+}
+
+#gpg-key-value {
+  margin: 10px;
+}
+
 /* Responsive Style */
 @media (max-width: 900px) {
   main {
