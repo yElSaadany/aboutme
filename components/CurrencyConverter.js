@@ -32,7 +32,8 @@ export const CurrencyConverter = () => {
   const [destCurrency, setDestCurrency] = useState(currencies[1].value);
   const [baseCurrencyValue, setBaseCurrencyValue] = useState(1);
   const [destCurrencyValue, setDestCurrencyValue] = useState(0);
-  const [relativeDestCurrencyValue, setRelativeDestCurrencyValue] = useState(0);
+  const [relativeBaseCurrencyValue, setRelativeBaseCurrencyValue] = useState(1);
+  const [relativeDestCurrencyValue, setRelativeDestCurrencyValue] = useState(1);
   const classes = styles();
 
   useEffect(() => {
@@ -47,6 +48,26 @@ export const CurrencyConverter = () => {
           console.log(res.data.rates[destCurrency]);
           setDestCurrencyValue(
             Math.round(res.data.rates[destCurrency] * 100) / 100
+          );
+          setRelativeDestCurrencyValue(
+            (prev) =>
+              Math.round(
+                relativeBaseCurrencyValue * res.data.rates[destCurrency] * 100
+              ) / 100
+          );
+          setBaseCurrencyValue(
+            Math.round((1 / res.data.rates[destCurrency]) * 100) / 100
+          );
+          setRelativeBaseCurrencyValue(
+            (prev) =>
+              Math.round(
+                (Math.round(
+                  relativeBaseCurrencyValue * res.data.rates[destCurrency] * 100
+                ) /
+                  100) *
+                  (1 / res.data.rates[destCurrency]) *
+                  100
+              ) / 100
           );
         })
         .catch((err) => {
@@ -65,14 +86,22 @@ export const CurrencyConverter = () => {
 
   const getNewConversion = (e) => {
     if (e.target.value.length === 0) {
-      setBaseCurrencyValue("");
+      setRelativeBaseCurrencyValue("");
     } else {
-      setBaseCurrencyValue(parseFloat(e.target.value));
+      setRelativeBaseCurrencyValue(parseFloat(e.target.value));
       console.log(parseFloat(e.target.value));
-      const tmp = parseFloat(e.target.value) * destCurrencyValue;
+      const tmp =
+        Math.round(parseFloat(e.target.value) * destCurrencyValue * 100) / 100;
       setRelativeDestCurrencyValue((prev) => tmp);
     }
     console.log(typeof e.target.value);
+  };
+
+  const getNewConversionFromDest = (e) => {
+    setRelativeDestCurrencyValue(parseFloat(e.target.value));
+    const tmp =
+      Math.round(parseFloat(e.target.value) * baseCurrencyValue * 100) / 100;
+    setRelativeBaseCurrencyValue((prev) => tmp);
   };
 
   return (
@@ -97,7 +126,7 @@ export const CurrencyConverter = () => {
           style={currencyInput}
           type="number"
           onChange={getNewConversion}
-          value={baseCurrencyValue}
+          value={relativeBaseCurrencyValue}
         />
       </div>
 
@@ -120,7 +149,7 @@ export const CurrencyConverter = () => {
         <input
           style={currencyInput}
           type="number"
-          onChange={getNewConversion}
+          onChange={getNewConversionFromDest}
           value={
             relativeDestCurrencyValue
               ? relativeDestCurrencyValue
