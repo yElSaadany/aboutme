@@ -19,10 +19,14 @@ const useStyles = makeStyles({
     textAlign: "justify",
   },
   area: {
-    height: 200,
+    height: 155,
   },
   actions: {
     marginTop: 10,
+  },
+  image: {
+    textAlign: "center",
+    width: "100%",
   },
 });
 
@@ -46,8 +50,8 @@ export const PortfolioCard = (props) => {
 
   return (
     <Card className={classes.root} variant="outlined">
+      <h3 className={classes.title}>{props.title || "Untitled"}</h3>
       <CardActionArea className={classes.area}>
-        <h3 className={classes.title}>{props.title || "Untitled"}</h3>
         {!showDetails ? (
           <img
             onMouseEnter={handleShowImage}
@@ -68,19 +72,25 @@ export const PortfolioCard = (props) => {
       </CardActionArea>
 
       <CardActions className={classes.actions}>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-        <Button size="small" color="primary">
-          View Live
-        </Button>
+        {props.firstButton && (
+          <Button
+            onClick={props.handleFirstButton}
+            size="small"
+            color="primary"
+          >
+            {props.firstButton}
+          </Button>
+        )}
+        {props.secondButton && (
+          <Button
+            onClick={props.handleSecondButton}
+            size="small"
+            color="primary"
+          >
+            {props.secondButton}
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
-};
-
-const cardStyle = {
-  width: "250px",
-  border: "solid black 3px",
-  height: "250px",
 };
