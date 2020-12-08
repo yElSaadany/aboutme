@@ -6,6 +6,7 @@ import { Snake } from "@bit/yelsaadany.react-games.snake";
 import { Backdrop } from "../components/Backdrop";
 import { Button } from "@material-ui/core";
 import { CurrencyConverter } from "../components/CurrencyConverter";
+import { PortfolioCard } from "../components/Card";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function Home() {
@@ -200,7 +201,11 @@ export default function Home() {
             showPortfolio ? "portfolio-content portfolio" : "portfolio"
           }
         >
-          Portfolio
+          <PortfolioCard
+            title="Project 1"
+            pathToImage="/cat.jpeg"
+            imageAlt="some cat"
+          />
         </div>
       </CSSTransition>
       <CSSTransition in={showContact} timeout={500} classNames="contact">
