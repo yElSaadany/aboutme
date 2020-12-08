@@ -59,7 +59,9 @@ export const PortfolioCard = (props) => {
           <CardContent onMouseLeave={handleShowImage}>
             <p className={classes.text}>
               {props.description ||
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rutrum accumsan arcu et lobortis. In id nunc non arcu tristique aliquam. In fermentum vitae lacus eget maximus."}
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                  "Proin rutrum accumsan arcu et lobortis. In id nunc non " +
+                  "arcu tristique aliquam. In fermentum vitae lacus eget maximus."}
             </p>
           </CardContent>
         )}

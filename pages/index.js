@@ -7,6 +7,7 @@ import { Backdrop } from "../components/Backdrop";
 import { Button } from "@material-ui/core";
 import { CurrencyConverter } from "../components/CurrencyConverter";
 import { PortfolioCard } from "../components/Card";
+import { Portfolio } from "../components/Portfolio";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function Home() {
@@ -201,11 +202,7 @@ export default function Home() {
             showPortfolio ? "portfolio-content portfolio" : "portfolio"
           }
         >
-          <PortfolioCard
-            title="Project 1"
-            pathToImage="/cat.jpeg"
-            imageAlt="some cat"
-          />
+          <Portfolio />
         </div>
       </CSSTransition>
       <CSSTransition in={showContact} timeout={500} classNames="contact">
